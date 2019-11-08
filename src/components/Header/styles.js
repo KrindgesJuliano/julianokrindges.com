@@ -15,5 +15,25 @@ export const Header = styled.header`
 export const Main = styled.div`
   margin: 0 auto;
   max-width: 940px;
-  height: 70px;
+  height: 57px;
+  display: flex;
+  justify-content: space-between;
+
+  > a {
+    align-self: center;
+    color: #fff;
+    font-size: 1.7rem;
+
+    text-decoration: none;
+  }
+`
+
+export const Links = styled.div`
+  display: flex;
+`
+export const Separator = styled.hr`
+  height: 25px;
+  margin: 0 10px 0 10px;
+  width: 1px;
+  align-self: center;
 `

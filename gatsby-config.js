@@ -1,8 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `Juliano Krindges`,
+    title: `Juliano Krindges - Web Developer`,
     description: `Desenvolvedor JavaScript, NodeJS | ReactJS | React Native`,
-    author: `@KrindgesJuliano`,
+    author: `Juliano Krindges`,
+    social: {
+      githubLink: `https://github.com/KrindgesJuliano`,
+      linkedinLink: `https://www.linkedin.com/in/juliano-krindges-m-pinheiro-ab526b52/`,
+    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -40,6 +44,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-transition-link`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
