@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 
-const Projects = () => (
+const Lab = () => (
   <Layout>
     <SEO title="Projetos" />
     <h1>Hi from the second page</h1>
@@ -13,4 +13,4 @@ const Projects = () => (
   </Layout>
 )
 
-export default Projects
+export default Lab

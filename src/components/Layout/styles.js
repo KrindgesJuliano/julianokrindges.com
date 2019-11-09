@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Layout = styled.section`
   background-color: #fff;
   display: block;
-  margin-top: 70px;
+  margin-top: 100px;
 `
 
 export const Main = styled.main.attrs({

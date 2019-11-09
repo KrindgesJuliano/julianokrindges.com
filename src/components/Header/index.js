@@ -18,6 +18,10 @@ const Header = ({ siteTitle }) => (
         to="/"
         title="Voltar para home"
       >
+        <img
+          src="https://avatars1.githubusercontent.com/u/16239598?v=4.jpg"
+          alt={siteTitle}
+        />
         {siteTitle}
       </AniLink>
 

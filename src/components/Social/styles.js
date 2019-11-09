@@ -26,7 +26,8 @@ export const SocialItem = styled.a.attrs(props => ({
   &:hover {
     color: tomato;
     border: none;
-    transition: 0.3s ease-in-out;
+    transition: 0.4s ease-in-out;
+    transform: scale(1.2);
   }
 `
 

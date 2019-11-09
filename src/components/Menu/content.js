@@ -4,8 +4,8 @@ const menuLinks = [
     url: '/about/',
   },
   {
-    label: 'projetos',
-    url: '/projects/',
+    label: 'Lab',
+    url: '/lab/',
   },
   {
     label: 'blog',

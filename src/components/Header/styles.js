@@ -20,11 +20,19 @@ export const Main = styled.div`
   justify-content: space-between;
 
   > a {
-    align-self: center;
+    display: flex;
+    align-items: center;
     color: #fff;
     font-size: 1.7rem;
 
     text-decoration: none;
+
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      margin: 10px;
+    }
   }
 `
 

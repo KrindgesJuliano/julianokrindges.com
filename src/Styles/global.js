@@ -23,7 +23,8 @@ body {
 }
 
 body, input, button {
-  font: 14px 'Roboto', sans-serif;
+  font-size: 1.3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 a{
