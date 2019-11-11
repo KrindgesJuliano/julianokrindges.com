@@ -5,7 +5,7 @@ module.exports = {
     author: `Juliano Krindges`,
     social: {
       githubLink: `https://github.com/KrindgesJuliano`,
-      linkedinLink: `https://www.linkedin.com/in/juliano-krindges-m-pinheiro-ab526b52/`,
+      linkedinLink: `https://www.linkedin.com/in/juliano-krindges-m-pinheiro-ab526b52`,
     },
   },
   plugins: [

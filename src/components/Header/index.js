@@ -27,7 +27,6 @@ const Header = ({ siteTitle }) => (
 
       <S.Links>
         <Menu />
-        <S.Separator />
         <Social />
       </S.Links>
     </S.Main>

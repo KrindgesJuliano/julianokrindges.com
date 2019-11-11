@@ -1,5 +1,7 @@
 import React from 'react'
 
+import SEO from '../components/seo'
+
 import Layout from '../components/Layout'
 import Author from '../components/Author'
 
@@ -8,6 +10,7 @@ import Author from '../components/Author'
 export default function About() {
   return (
     <Layout>
+      <SEO title="about" />
       <Author fullText={() => fullText} />
     </Layout>
   )

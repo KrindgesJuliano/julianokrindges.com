@@ -3,8 +3,8 @@ import { LinkedinIn, GithubAlt } from 'styled-icons/fa-brands'
 
 const Icon = `
   display: block;
-  height: 1.4rem;
-  width: 1.4rem;
+  height: 1.3rem;
+  width: 1.3rem;
 `
 
 export const Social = styled.div`
@@ -20,14 +20,14 @@ export const SocialItem = styled.a.attrs(props => ({
   align-items: center;
   display: inline-flex;
   color: #fff;
+  width: 50px;
   padding: 0 10px 0 10px;
+  justify-content: center;
+  transition: color 0.5s ease;
 
   &:focus,
   &:hover {
     color: tomato;
-    border: none;
-    transition: 0.4s ease-in-out;
-    transform: scale(1.2);
   }
 `
 
