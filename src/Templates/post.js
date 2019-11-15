@@ -1,58 +1,33 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
-import get from 'lodash/get'
+import { graphql } from 'gatsby'
 
-const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
+export default function blogPost({ data }) {
+  const { markdownRemark } = data // data.markdownRemark holds your post data
+  const { frontmatter, html } = markdownRemark
+  return (
+    <div className="blog-post">
+      <h1>{frontmatter.title}</h1>
+      <h2>{frontmatter.date}</h2>
+      <div
+        className="blog-post-content"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </div>
+  )
+}
+export const pageQuery = graphql`
+  query Post($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
       html
+      field {
+        slug
+      }
       frontmatter {
-        title
         date(formatString: "MMMM DD, YYYY")
+        description
+        title
+        tags
       }
     }
   }
 `
-
-export default function BlogPost(props) {
-  const post = props.data.markdownRemark
-  const siteTitle = get(props, 'data.site.siteMetadata.title')
-  const { previous, next } = props.pathContext
-
-  return (
-    <div>
-      <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-      <h1>{post.frontmatter.title}</h1>
-      <p>{post.frontmatter.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      <hr />
-      <Bio />
-
-      <ul>
-        {previous && (
-          <li>
-            <Link to={previous.fields.slug} rel="prev">
-              ← {previous.frontmatter.title}
-            </Link>
-          </li>
-        )}
-
-        {next && (
-          <li>
-            <Link to={next.fields.slug} rel="next">
-              {next.frontmatter.title} →
-            </Link>
-          </li>
-        )}
-      </ul>
-    </div>
-  )
-}

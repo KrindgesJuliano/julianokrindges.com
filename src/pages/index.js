@@ -5,6 +5,7 @@ import Image from '../components/image'
 import SEO from '../components/seo'
 
 import Author from '../components/Author'
+import PostList from '../components/PostsList'
 
 const IndexPage = () => (
   <Layout>
@@ -15,6 +16,7 @@ const IndexPage = () => (
     <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
       <Image />
     </div>
+    <PostList />
   </Layout>
 )
 

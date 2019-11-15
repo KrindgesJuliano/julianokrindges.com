@@ -8,44 +8,85 @@
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
 
-  // Query for markdown nodes to use in creating pages.
-  const result = await graphql(
+const path = require(`path`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
+
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  const blogPost = path.resolve(`./src/Templates/post.js`)
+
+  return graphql(
     `
       {
-        allMarkdownRemark(limit: 1000) {
+        allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 1000
+        ) {
           edges {
             node {
+              fields {
+                slug
+              }
               frontmatter {
-                path
+                date
+                description
+                title
+                tags
               }
             }
           }
         }
       }
-    `
-  )
+    `,
+    { limit: 1000 }
+  ).then(result => {
+    if (result.errors) {
+      throw result.errors
+    }
 
-  // Handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
+    // Create  blog post pages
+    const posts = result.data.allMarkdownRemark.edges
 
-  // Create pages for each markdown file.
-  const blogPostTemplate = path.resolve(`src/templates/post.js`)
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const { path } = node.frontmatter
-    createPage({
-      path,
-      component: blogPostTemplate,
-      // In your blog post template's graphql query, you can use path
-      // as a GraphQL variable to query for data from the markdown file.
-      context: {
-        path,
-      },
+    posts.forEach(({ node }) => {
+      const { slug } = node.fields
+      createPage({
+        path: slug,
+        component: blogPost,
+        context: {
+          slug,
+        },
+      })
     })
+
+    // Create blog post list pages
+    const postsPerPage = 10
+    const numPages = Math.ceil(posts.length / postsPerPage)
+
+    Array.from({ length: numPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/blog/` : `/blog/page/${i + 1}`,
+        component: path.resolve('./src/templates/blog-list.js'),
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages,
+          currentPage: i + 1,
+        },
+      })
+    })
+
+    exports.onCreateNode = ({ node, getNode }) => {
+      const { createNodeField } = actions
+
+      if (node.internal.type === `MarkdownRemark`) {
+        const slug = createFilePath({ node, getNode, basePath: `blog` })
+        createNodeField({
+          node,
+          name: `slug`,
+          value: `blog/${slug.slice(12)}`,
+        })
+      }
+    }
   })
 }

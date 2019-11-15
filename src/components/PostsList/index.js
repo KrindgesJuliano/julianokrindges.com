@@ -1,18 +1,50 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 
-// import { Container } from './styles';
+import BlogItem from '../BlogItem'
 
-export default function Posts({ data }) {
-  const { edges } = data.allMarkdownRemark
-  const posts = edges.map(({ node }) => (
-    <div key={node.fields.slug} className="post">
-      <Link to={node.fields.slug} className="post-title">
-        <h2>{node.frontmatter.title}</h2>
-      </Link>
-      <p className="post-date">{node.frontmatter.date}</p>
-      <p>{node.frontmatter.description}</p>
-    </div>
-  ))
-  return <div className="posts">{posts}</div>
+import * as S from './styles'
+
+const blogListQuery = graphql`
+  query {
+    allMarkdownRemark(
+      limit: 2
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+            description
+            title
+            tags
+          }
+          timeToRead
+        }
+      }
+    }
+  }
+`
+
+export default function PostList({ data }) {
+  const allPostList = useStaticQuery(blogListQuery)
+  const list = allPostList.allMarkdownRemark.edges
+
+  return (
+    <S.PostList>
+      <S.Title>Ultimos Posts do Blog</S.Title>
+      <S.Nav>
+        {list.map(({ node }, i) => (
+          <BlogItem
+            key={i}
+            date={node.frontmatter.date}
+            title={node.frontmatter.title}
+            description={node.frontmatter.description}
+            tags={node.frontmatter.tags}
+            timeToRead={node.timeToRead}
+          />
+        ))}
+      </S.Nav>
+    </S.PostList>
+  )
 }
