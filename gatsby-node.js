@@ -10,13 +10,17 @@
 // data layer is bootstrapped to let plugins create pages from data.
 
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const _ = require('lodash')
 
-exports.createPages = ({ graphql, actions }) => {
+const { createFilePath } = require(`gatsby-source-filesystem`)
+const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+  const blogList = path.resolve(`./src/Templates/blog-list.js`)
   const blogPost = path.resolve(`./src/Templates/post.js`)
 
-  return graphql(
+  const result = await graphql(
     `
       {
         allMarkdownRemark(
@@ -29,64 +33,90 @@ exports.createPages = ({ graphql, actions }) => {
                 slug
               }
               frontmatter {
-                date
+                date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
                 description
                 title
                 tags
               }
             }
+            next {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              }
+            }
+            previous {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              }
+            }
           }
         }
       }
-    `,
-    { limit: 1000 }
-  ).then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
+    `
+  )
 
-    // Create  blog post pages
-    const posts = result.data.allMarkdownRemark.edges
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+  // Create  blog post pages
 
-    posts.forEach(({ node }) => {
-      const { slug } = node.fields
-      createPage({
-        path: slug,
-        component: blogPost,
-        context: {
-          slug,
-        },
-      })
+  const posts = result.data.allMarkdownRemark.edges
+
+  posts.forEach(({ node, next, previous }) => {
+    const { slug } = node.fields
+    createPage({
+      path: slug,
+      component: blogPost,
+      context: {
+        slug,
+        previous: next,
+        next: previous,
+      },
     })
-
-    // Create blog post list pages
-    const postsPerPage = 10
-    const numPages = Math.ceil(posts.length / postsPerPage)
-
-    Array.from({ length: numPages }).forEach((_, i) => {
-      createPage({
-        path: i === 0 ? `/blog/` : `/blog/page/${i + 1}`,
-        component: path.resolve('./src/templates/blog-list.js'),
-        context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
-          numPages,
-          currentPage: i + 1,
-        },
-      })
-    })
-
-    exports.onCreateNode = ({ node, getNode }) => {
-      const { createNodeField } = actions
-
-      if (node.internal.type === `MarkdownRemark`) {
-        const slug = createFilePath({ node, getNode, basePath: `blog` })
-        createNodeField({
-          node,
-          name: `slug`,
-          value: `blog/${slug.slice(12)}`,
-        })
-      }
-    }
   })
+
+  // create blog post list pages
+
+  const PAGE_SIZE = 10
+
+  const chunks = _.chunk(posts, PAGE_SIZE)
+
+  chunks.forEach((chunk, index) => {
+    createPage({
+      path: index === 0 ? `/blog/` : `blog/page/${index + 1}`,
+      component: blogList,
+      context: {
+        skip: PAGE_SIZE * index,
+        limit: PAGE_SIZE,
+        pageNumber: index + 1,
+        hasNextPage: index !== chunks.length - 1,
+        nextPageLink: `/blog/page/${index + 2}`,
+      },
+    })
+  })
+}
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+
+  fmImagesToRelative(node)
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({ node, getNode, basePath: `blog` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
+  }
 }

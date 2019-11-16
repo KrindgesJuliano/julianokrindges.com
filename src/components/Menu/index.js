@@ -10,7 +10,6 @@ export default function Menu() {
     <S.Menu>
       {menuLinks.map((link, i) => (
         <AniLink
-          partiallyActivate
           // eslint-disable-next-line react/no-array-index-key
           key={i}
           cover

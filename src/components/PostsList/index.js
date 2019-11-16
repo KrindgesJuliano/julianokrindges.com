@@ -13,6 +13,9 @@ const blogListQuery = graphql`
     ) {
       edges {
         node {
+          fields {
+            slug
+          }
           frontmatter {
             date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
             description

@@ -1,23 +1,25 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { get } from 'lodash'
 
-import BlogItem from '../components/BlogItem'
+import BlogItem from '../components/BlogItem/index'
 import SEO from '../components/seo'
-import Layout from '../components/Layout'
+import Layout from '../components/Layout/index'
 
 export const BlogListQuery = graphql`
   query {
     allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
       edges {
         node {
+          id
           fields {
             slug
           }
           frontmatter {
+            title
             date
             description
-            title
-            tags
+            draft
           }
           timeToRead
         }
@@ -26,13 +28,13 @@ export const BlogListQuery = graphql`
   }
 `
 
-export default function BlogList(props) {
-  const list = props.data.allMarkdownRemark.edges
+const BlogListPage = ({ data, pageContext }) => {
+  const list = data.allMarkdownRemark.edges
 
   return (
     <Layout>
       <SEO title="Blog" />
-      {list.map(({ node }, i) => (
+      {get(data, list, []).map((node, i) => (
         <BlogItem
           key={i}
           slug={node.fields.slug}
@@ -46,3 +48,5 @@ export default function BlogList(props) {
     </Layout>
   )
 }
+
+export default BlogListPage
