@@ -8,7 +8,7 @@ import * as S from './styles'
 const blogListQuery = graphql`
   query {
     allMarkdownRemark(
-      limit: 2
+      limit: 3
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       edges {
@@ -45,6 +45,7 @@ export default function PostList({ data }) {
             description={node.frontmatter.description}
             tags={node.frontmatter.tags}
             timeToRead={node.timeToRead}
+            slug={node.fields.slug}
           />
         ))}
       </S.Nav>
