@@ -1,8 +1,8 @@
 import React from 'react'
 
-import * as S from './styles'
-
 import ItemBox from '../ItemBox'
+
+import * as S from './styles'
 
 export default function BlogItem({
   slug,
@@ -13,24 +13,24 @@ export default function BlogItem({
   description,
 }) {
   return (
-    <ItemBox>
-      <S.BlogItem
-        to={`/${slug}`}
-        cover
-        direction="down"
-        duration={1}
-        title={title}
-      >
-        <S.Content>
-          <S.Title>{title}</S.Title>
-          <S.Description>{description}</S.Description>
-          <S.TimeToRead>{timeToRead}</S.TimeToRead>
-          <S.Footer>
-            <span>{tags}</span>
-            <div>{date}</div>
-          </S.Footer>
-        </S.Content>
-      </S.BlogItem>
-    </ItemBox>
+    <S.BlogItem
+      to={`${slug}`}
+      cover
+      direction="down"
+      duration={1}
+      title={title}
+    >
+      <ItemBox>
+        <S.Title>{title}</S.Title>
+        <span>{tags}</span>
+        <S.Description>{description}</S.Description>
+        <S.Footer>
+          <S.Time>
+            {date}
+            <span> - {timeToRead} MIN </span>
+          </S.Time>
+        </S.Footer>
+      </ItemBox>
+    </S.BlogItem>
   )
 }

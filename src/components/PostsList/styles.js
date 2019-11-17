@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const PostList = styled.div`
   padding: 10px;
-  background: #263859;
   width: 100%;
-  height: 400px;
+  min-width: 320px;
+  max-width: 1366px;
 `
 
 export const Title = styled.div`

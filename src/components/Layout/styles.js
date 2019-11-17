@@ -11,7 +11,7 @@ export const Main = styled.main.attrs({
 })`
   margin: 0 auto;
   min-height: 90vh;
-  max-width: 960;
+  max-width: 1366px;
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
 `
