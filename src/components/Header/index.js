@@ -3,7 +3,6 @@ import React from 'react'
 import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 import Menu from '../Menu'
-import Social from '../Social'
 
 import * as S from './styles'
 
@@ -27,7 +26,6 @@ const Header = ({ siteTitle }) => (
 
       <S.Links>
         <Menu />
-        <Social />
       </S.Links>
     </S.Main>
   </S.Header>

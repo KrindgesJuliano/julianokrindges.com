@@ -5,6 +5,7 @@ export const BlogItem = styled.div`
   height: 200px;
   min-width: 400px;
   position: relative;
+  margin-bottom: 20px;
 `
 
 export const Title = styled.h1`
