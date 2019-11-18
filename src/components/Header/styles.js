@@ -1,4 +1,12 @@
 import styled from 'styled-components'
+import { ChevronLeft, ChevronRight } from 'styled-icons/fa-solid'
+
+const Icon = `
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  color: tomato;
+`
 
 export const Header = styled.header`
   background: #263859;
@@ -13,7 +21,7 @@ export const Header = styled.header`
 
 export const Main = styled.div`
   margin: 0 auto;
-  max-width: 1366px;
+  max-width: 1080px;
   height: 57px;
   display: flex;
   justify-content: space-between;
@@ -44,4 +52,12 @@ export const Separator = styled.hr`
   margin: 0 10px 0 10px;
   width: 1px;
   align-self: center;
+`
+
+export const TagLeft = styled(ChevronLeft)`
+  ${Icon}
+`
+
+export const TagRight = styled(ChevronRight)`
+  ${Icon}
 `
