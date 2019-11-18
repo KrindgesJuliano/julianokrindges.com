@@ -66,11 +66,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Handle errors
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
+    console.log(result.errors)
     return
   }
-  // Create  blog post pages
 
   const posts = result.data.allMarkdownRemark.edges
+
+  // Create blog page
 
   posts.forEach(({ node, next, previous }) => {
     const { slug } = node.fields
@@ -86,7 +88,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   // create blog post list pages
-
   const PAGE_SIZE = 10
 
   const chunks = _.chunk(posts, PAGE_SIZE)
@@ -112,11 +113,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   fmImagesToRelative(node)
 
   if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `blog` })
+    const slug = createFilePath({ node, getNode, basePath: `blog/` })
     createNodeField({
       node,
       name: `slug`,
-      value: slug,
+      value: `/blog${slug}`,
     })
   }
 }
