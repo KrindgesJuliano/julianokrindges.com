@@ -6,17 +6,18 @@ export const Header = styled.header`
   left: 0;
   position: fixed;
   right: 0;
-  text-transform: lowercase;
+  text-transform: capitalize;
   top: 0;
   width: 100%;
 `
 
 export const Main = styled.div`
   margin: 0 auto;
-  max-width: 940px;
+  max-width: 1366px;
   height: 57px;
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 
   > a {
     display: flex;

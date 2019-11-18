@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 import ItemBox from '../ItemBox'
 
@@ -13,24 +15,36 @@ export default function BlogItem({
   description,
 }) {
   return (
-    <S.BlogItem
-      to={`${slug}`}
-      cover
-      direction="down"
-      duration={1}
-      title={title}
-    >
-      <ItemBox>
-        <S.Title>{title}</S.Title>
-        <span>{tags}</span>
-        <S.Description>{description}</S.Description>
-        <S.Footer>
-          <S.Time>
-            {date}
-            <span> - {timeToRead} MIN </span>
-          </S.Time>
-        </S.Footer>
-      </ItemBox>
+    <S.BlogItem>
+      <AniLink
+        to={`/${slug}`}
+        cover
+        bg="#fff"
+        direction="down"
+        duration={1}
+        title={title}
+      >
+        <ItemBox>
+          <S.Title>{title}</S.Title>
+          <S.Description>{description}</S.Description>
+          <S.Footer>
+            <span>{tags}</span>
+            <S.Time>
+              {date}
+              <span> * {timeToRead} MIN </span>
+            </S.Time>
+          </S.Footer>
+        </ItemBox>
+      </AniLink>
     </S.BlogItem>
   )
+}
+
+BlogItem.propTypes = {
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string,
+  timeToRead: PropTypes.number,
+  tags: PropTypes.array,
+  description: PropTypes.string,
 }

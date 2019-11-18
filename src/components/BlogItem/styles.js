@@ -6,6 +6,11 @@ export const BlogItem = styled.div`
   min-width: 400px;
   position: relative;
   margin-bottom: 20px;
+
+  > a {
+    text-decoration: none;
+    color: #333;
+  }
 `
 
 export const Title = styled.h1`
@@ -13,7 +18,7 @@ export const Title = styled.h1`
   font-weight: bold;
   margin-bottom: 10px;
 
-  &::after {
+  &:after {
     content: ' ';
     background: tomato;
     right: 0;
