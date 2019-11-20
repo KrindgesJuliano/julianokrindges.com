@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
 
 *{
   margin: 0;
@@ -24,7 +24,7 @@ body {
 
 body, input, button {
   font-size: 1.3rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Nunito", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 a{

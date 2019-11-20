@@ -1,6 +1,5 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { get } from 'lodash'
 
 import BlogItem from '../components/BlogItem/index'
 import SEO from '../components/seo'

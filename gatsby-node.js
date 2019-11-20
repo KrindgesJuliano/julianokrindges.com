@@ -113,11 +113,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   fmImagesToRelative(node)
 
   if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `blog/` })
+    const slug = createFilePath({ node, getNode, basePath: `blog` })
     createNodeField({
       node,
       name: `slug`,
-      value: `/blog${slug}`,
+      value: `blog${slug}`,
     })
   }
 }

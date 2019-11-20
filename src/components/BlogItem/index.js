@@ -28,10 +28,9 @@ export default function BlogItem({
           <S.Title>{title}</S.Title>
           <S.Description>{description}</S.Description>
           <S.Footer>
-            <span>{tags}</span>
             <S.Time>
               {date}
-              <span> * {timeToRead} MIN </span>
+              <span> - {timeToRead} MIN </span>
             </S.Time>
           </S.Footer>
         </ItemBox>
