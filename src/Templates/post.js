@@ -1,24 +1,39 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
+import SEO from '../components/seo'
 import Layout from '../components/Layout'
+import GridTemplate from '../components/GridTemplate'
+
+import PostHeader from '../components/PostHeader/index'
+import Content from '../components/Content'
 
 export default function blogPost({ data }) {
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark
+  const { html } = data.markdownRemark
+  const { title, tags, date, description } = data.markdownRemark.frontmatter
+
   return (
     <Layout>
-      <div className="blog-post">
-        <h1>{frontmatter.title}</h1>
-        <h2>{frontmatter.date}</h2>
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: html }}
+      <SEO title={title} description={description} />
+      <GridTemplate>
+        <PostHeader
+          tags={tags}
+          title={title}
+          date={date}
+          description={description}
         />
-      </div>
+
+        <Content>
+          <div
+            className="blog-post-content"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </Content>
+      </GridTemplate>
     </Layout>
   )
 }
+
 export const pageQuery = graphql`
   query Post($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -27,7 +42,7 @@ export const pageQuery = graphql`
         slug
       }
       frontmatter {
-        date
+        date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
         description
         title
         tags

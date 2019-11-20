@@ -8,7 +8,8 @@ export const Container = styled.div`
   padding: 0 15px 0 10px;
   color: #fff;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 22px;
   margin: auto 0;
   border-radius: 3px 0px 0px 3px;
+  margin-left: 10px;
 `
