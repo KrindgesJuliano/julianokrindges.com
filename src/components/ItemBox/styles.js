@@ -1,19 +1,21 @@
 import styled from 'styled-components'
 
+import * as V from '../../Styles/variables'
+
 export const Box = styled.div`
   position: relative;
   display: block;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
-  transition: all 0.25s;
+  box-shadow: ${V.BoxShadow.defaultBox};
+  transition: ${V.Transition.default};
   top: 0;
   height: 100%;
   padding: 10px;
   border-radius: 8px;
-  background: #fff;
+  background: ${V.Colors.whiteSolid};
   margin: 10px;
 
   &:hover {
     top: -10px;
-    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: ${V.BoxShadow.boxTransformation};
   }
 `
