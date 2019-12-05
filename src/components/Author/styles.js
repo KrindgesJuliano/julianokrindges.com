@@ -6,7 +6,6 @@ export const Content = styled.div`
   line-height: 1.5em;
   color: rgba(0, 0, 0, 0.7);
   margin-top: 10px;
-  height: 70vh;
 
   h1 {
     margin-bottom: 20px;

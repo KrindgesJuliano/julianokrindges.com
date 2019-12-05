@@ -17,9 +17,7 @@ const Header = ({ siteTitle }) => (
         to="/"
         title="Voltar para home"
       >
-        <S.TagLeft />
         {siteTitle}
-        <S.TagRight />
       </AniLink>
 
       <S.Links>

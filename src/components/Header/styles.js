@@ -53,11 +53,3 @@ export const Separator = styled.hr`
   width: 1px;
   align-self: center;
 `
-
-export const TagLeft = styled(ChevronLeft)`
-  ${Icon}
-`
-
-export const TagRight = styled(ChevronRight)`
-  ${Icon}
-`
