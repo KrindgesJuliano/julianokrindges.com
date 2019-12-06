@@ -1,12 +1,4 @@
 import styled from 'styled-components'
-import { ChevronLeft, ChevronRight } from 'styled-icons/fa-solid'
-
-const Icon = `
-  display: block;
-  height: 1.5rem;
-  width: 1.5rem;
-  color: tomato;
-`
 
 export const Header = styled.header`
   background: #263859;

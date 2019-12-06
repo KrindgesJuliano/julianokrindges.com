@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Section } from 'react-scroll-section'
 
 import * as S from './styles'
 
-export default function Section({ children, id }) {
+export default function SectionContainer({ children, id }) {
   return (
-    <Section id={id}>
+    <Section id={id} style={{ position: 'relative' }}>
       <S.Container>{children}</S.Container>
     </Section>
   )
 }
 
-Section.propTypes = {
+SectionContainer.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string.isRequired,
 }

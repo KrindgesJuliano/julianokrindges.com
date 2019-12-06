@@ -5,7 +5,7 @@ const menuLinks = [
   },
   {
     label: 'Lab',
-    url: '/lab/',
+    url: '#lab',
   },
   {
     label: 'blog',

@@ -1,27 +1,29 @@
 import React from 'react'
 import AniLink from 'gatsby-plugin-transition-link/AniLink'
+import { SectionLink } from 'react-scroll-section'
 
 import * as S from './styles'
-
-import menuLinks from './content'
 
 export default function Menu() {
   return (
     <S.Menu>
-      {menuLinks.map((link, i) => (
-        <AniLink
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
-          cover
-          bg="#fff"
-          direction="down"
-          duration={1}
-          to={link.url}
-          activeClassName="active"
-        >
-          {link.label}
-        </AniLink>
-      ))}
+      <AniLink
+        cover
+        bg="#fff"
+        direction="down"
+        duration={1}
+        to="#"
+        activeClassName="active"
+      >
+        <S.Item>Contato</S.Item>
+      </AniLink>
+      <SectionLink section="lab">
+        {link => (
+          <S.Item onClick={link.onClick} selected={link.isSelected}>
+            Projetos
+          </S.Item>
+        )}
+      </SectionLink>
     </S.Menu>
   )
 }

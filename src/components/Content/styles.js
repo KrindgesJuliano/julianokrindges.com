@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import media from 'styled-media-query'
 
 import * as V from '../../Styles/variables'
 import * as T from '../../Styles/typography'
