@@ -11,7 +11,6 @@ export default function BlogItem({
   date,
   timeToRead,
   title,
-  tags,
   description,
 }) {
   return (
@@ -44,6 +43,11 @@ BlogItem.propTypes = {
   title: PropTypes.string.isRequired,
   date: PropTypes.string,
   timeToRead: PropTypes.number,
-  tags: PropTypes.array,
   description: PropTypes.string,
+}
+
+BlogItem.defaultProps = {
+  date: '',
+  timeToRead: '',
+  description: '',
 }

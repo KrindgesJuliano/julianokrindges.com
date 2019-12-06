@@ -29,7 +29,7 @@ const blogListQuery = graphql`
   }
 `
 
-export default function PostList({ data }) {
+export default function PostList() {
   const allPostList = useStaticQuery(blogListQuery)
   const list = allPostList.allMarkdownRemark.edges
 

@@ -29,7 +29,7 @@ export const BlogListQuery = graphql`
   }
 `
 
-const BlogListPage = ({ data, pageContext }) => {
+const BlogListPage = () => {
   const allPostList = useStaticQuery(BlogListQuery)
   const list = allPostList.allMarkdownRemark.edges
 
